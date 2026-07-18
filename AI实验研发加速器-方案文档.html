@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>AI 实验研发加速器 — 方案文档</title>
+    <style>
+        @media print {
+            body { font-size: 11pt; line-height: 1.6; }
+            h1 { font-size: 18pt; page-break-after: avoid; }
+            h2 { font-size: 14pt; page-break-after: avoid; }
+            h3 { font-size: 12pt; page-break-after: avoid; }
+            pre, blockquote, table { page-break-inside: avoid; }
+        }
+        body {
+            font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            max-width: 210mm;
+            margin: 20mm auto;
+            padding: 0 15mm;
+            color: #333;
+            line-height: 1.7;
+            font-size: 11pt;
+        }
+        h1 {
+            font-size: 22pt;
+            color: #1a1a1a;
+            border-bottom: 3px solid #4A90D9;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        h2 {
+            font-size: 16pt;
+            color: #2c2c2c;
+            border-left: 4px solid #4A90D9;
+            padding-left: 12px;
+            margin-top: 25px;
+        }
+        h3 {
+            font-size: 13pt;
+            color: #444;
+            margin-top: 20px;
+        }
+        blockquote {
+            border-left: 4px solid #4A90D9;
+            margin: 15px 0;
+            padding: 10px 20px;
+            background: #f8f9fa;
+            color: #555;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: "Consolas", "Monaco", monospace;
+            font-size: 10pt;
+            line-height: 1.5;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "Consolas", "Monaco", monospace;
+            font-size: 10pt;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 10.5pt;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background: #4A90D9;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        strong {
+            color: #1a1a1a;
+        }
+        .cover {
+            text-align: center;
+            padding: 60px 20px;
+            border-bottom: 2px solid #4A90D9;
+            margin-bottom: 40px;
+        }
+        .cover h1 {
+            border: none;
+            font-size: 26pt;
+            margin-bottom: 10px;
+        }
+        .cover .subtitle {
+            font-size: 14pt;
+            color: #666;
+            margin-top: 10px;
+        }
+        .cover .meta {
+            font-size: 11pt;
+            color: #888;
+            margin-top: 30px;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="cover">
+    <h1>AI 实验研发加速器</h1>
+    <div class="subtitle">基于飞书会议 AI 的智能自主实验室研发效能平台</div>
+    <div class="meta">
+        参赛赛道：晶泰科技 · 智能自主实验室<br>
+        角色：智能自主实验室研发效能负责人<br>
+        核心创新：让 AI 在会议中实时"模拟实验"，当场判断参数可行性
+    </div>
+</div>
+
+<h2>命题前置分析与洞察</h2>
+<p>药物研发面临一个结构性效率悖论：<strong>实验执行的自动化程度持续提升，但决定"做什么实验"的前置决策环节仍高度依赖个体经验直觉。</strong> 行业数据显示，全球头部药企约60%的研发支出消耗于最终未能获批的候选分子（Deloitte, 2025），而在临床前阶段，每一轮失败的实验迭代平均消耗数万元直接成本与1-2周周期——其中相当比例的失败在方案设计阶段即可通过历史数据比对被识别和规避。</p>
+
+<p>这一问题的根源在于，研发组织中资深科学家的隐性判断标准——即"经验直觉"——始终未被系统化地转化为可量化的决策辅助能力。2025年发表于Drug Discovery Today的研究框架明确指出，资深科研人员离职会造成"知识真空"，并通过相互依赖的阶段关卡级联扩散（Jones et al., 2025）。当前主流ELN与LIMS平台的AI能力集中于实验记录的结构化录入与事后检索，未能触及<strong>实验方案形成过程——即会议室中发生的参数论证与风险预判</strong>——这一关键决策节点。</p>
+
+<p>与此同时，自驱动实验室（Self-Driving Lab）领域的最新进展揭示了另一个维度的机会：2025年Nature Chemical Engineering报道的"AI Advisor"系统已能在实验执行阶段实时监控数据并提示研究人员切换策略，但这一能力被局限于"实验执行中"而非"方案讨论时"。通用会议AI产品则缺乏化学与制药领域的语义理解能力，无法识别专业实验参数与风险信号。</p>
+
+<p>基于以上分析，本命题的核心机会在于：<strong>将实时数据推演能力从"实验执行端"前移至"方案决策端"</strong>，在飞书会议中构建面向实验参数的即时可行性评估引擎，将研发决策模式从"经验主导→试错验证"转变为"数据辅助→推演纠偏"。这将填补智能自主实验室从"实验自动化"到"决策智能化"的关键缺口。</p>
+
+<hr>
+
+<h2>整体解决方案设计</h2>
+
+<h3>1. 方案概述</h3>
+<p>本方案在飞书会议中构建<strong>「实验方案实时推演引擎」</strong>——将会议 AI 从被动的对话记录者转变为主动的决策辅助者。其核心逻辑为：在研发团队于飞书会议中讨论实验方案的同一时刻，AI 自动提取对话中的实验参数，实时检索历史实验数据库进行相似条件比对，即时输出可行性评分、风险标注与改进建议，将方案纠偏从"实验失败后复盘"前移至"方案讨论时拦截"。</p>
+
+<p>该引擎精准嵌入晶泰科技现有 DMTA（设计 Design → 制造 Make → 测试 Test → 分析 Analyze）智能闭环的<strong>「D→M」衔接处</strong>。当前这一卡口完全依赖参会科学家的人工经验判断——也是整个 DMTA 飞轮中唯一未被数据结构化与智能辅助的环节。</p>
+
+<h3>2. 整体架构与核心功能模块</h3>
+<p>系统采用三层架构，全部基于飞书开放平台现有能力构建：</p>
+
+<p><strong>感知层 — 领域语义解析器。</strong> 飞书会议 AI 提供实时转录流，上层构建化学与制药领域语义解析器，从对话中结构化提取实验参数（pH、浓度、温度、沉淀剂、缓冲液、孵育时间等）及语义信号（风险表述、争议意图、优化方向、决议结论）。解析器内部维护领域术语词典与失败模式知识库，支持参数别名映射与单位归一化。</p>
+
+<p><strong>推理层 — 实时推演引擎。</strong> 历史数据检索模块接收感知层输出的结构化参数后，从飞书知识库与多维表格中检索相似历史实验记录，执行多维相似度加权评分——参数越接近、时间越近、靶点/蛋白体系越相关的实验权重越高。同时调用失败模式库进行已知风险条件交叉比对，标记命中项并计算综合可行性评分。相似度匹配算法基于参数空间欧氏距离加体系相似性系数，支持缺失参数条件下的鲁棒推理。</p>
+
+<p><strong>交互层 — 实时推送与知识闭环。</strong> 推演结果在会议中通过飞书侧边栏实时呈现，包含可行性评分、风险清单及参数级改进建议。会议结束后，决议结论自动同步至飞书文档（生成结构化纪要）、飞书任务（分发执行任务）与多维表格（更新参数追踪表），完成从决策到执行的知识闭环。</p>
+
+<h3>3. 核心创新点</h3>
+
+<p><strong>时机创新：从"事后记录"到"事中推演"。</strong> 行业首次将 AI 推演能力从实验执行端前移至方案讨论端。现有自驱动实验室（如武田 SDL、Atinary SDLabs）的 AI 优化均发生于实验启动之后，本方案在讨论阶段即介入——在实验成本发生之前完成方案验证。</p>
+
+<p><strong>模式创新：重新定义会议 AI 角色。</strong> 会议 AI 的角色从"速记员"升级为"实验参谋"，研发决策模式从"资深科学家凭直觉提议 → 等待实验出结果 → 失败后归因调整"转变为"多人提案 → AI 实时推演纠偏 → 采纳可行方案 → 执行验证"，显著压缩试错迭代次数。</p>
+
+<p><strong>领域创新：制药垂直语义层。</strong> 构建化学与制药领域的语义解析中间层——包含领域术语词典、参数别名映射、失败模式知识库——使通用飞书会议 AI 具备识别"pH 6.5 接近蛋白 pI 沉淀风险""PEG 浓度梯度优化区间"等专业信号的能力。中间层架构确保底层通用 AI 升级不破坏上层领域逻辑。</p>
+
+<h3>4. 预期业务价值</h3>
+<p>以晶泰科技月均数万次化学反应、300+ 台机器人实验工站的实验规模为基准进行保守测算：假设方案阶段拦截 15% 的低可行性实验，每次湿实验直接成本 500–5,000 元（试剂 + 耗材 + 仪器占用），每轮迭代周期 3–7 天。年度可避免无效实验数千次，节省直接成本数百万元，缩短 1–2 轮整体迭代周期。更深层的战略价值在于——将资深科学家的隐性判断标准系统化为可量化的推演规则与可检索的决策证据链，降低研发组织对个别专家的经验依赖，为晶泰从"实验自动化"向"研发认知自动化"的跃迁提供关键基础设施。</p>
+
+<h3>5. 落地可行性与可推广性</h3>
+<p>系统完全基于飞书开放平台现有能力构建——会议 AI 实时转录、开放平台事件订阅与文档 API、多维表格 Bitable API、知识库 API 均为成熟接口。领域语义解析层通过 Prompt 工程与术语词典实现，无需自研大模型，开发成本可控。推演引擎核心为相似度匹配与规则引擎，无高算力依赖。落地路径为：选定单一实验项目组试点（1-2 周）→ 验证参数提取准确率与推演命中率 → 扩展至全实验线 → 推广至电池材料、新能源等同样采用 DMTA 闭环的兄弟业务线。跨企业推广层面，本方案的领域适配中间层架构支持通过替换术语词典快速迁移至其他制药/材料研发组织，具备平台化输出潜力。</p>
+
+<hr>
+
+<h2>Demo 演示：AI 实时推演实验可行性</h2>
+
+<h3>推演对比</h3>
+<table>
+<tr><th>维度</th><th>失败方案（原始）</th><th>改进方案（优化后）</th></tr>
+<tr><td><strong>靶点</strong></td><td>CDK7</td><td>CDK7</td></tr>
+<tr><td><strong>pH</strong></td><td>6.0</td><td>7.5</td></tr>
+<tr><td><strong>蛋白浓度</strong></td><td>12 mg/ml</td><td>15 mg/ml → 12.5 mg/ml</td></tr>
+<tr><td><strong>温度</strong></td><td>25°C</td><td>4°C</td></tr>
+<tr><td><strong>沉淀剂</strong></td><td>PEG3350</td><td>PEG3350</td></tr>
+<tr><td><strong>PEG浓度</strong></td><td>25%</td><td>18% → 15%</td></tr>
+<tr><td><strong>缓冲液</strong></td><td>Tris 7.5</td><td>Tris 7.5</td></tr>
+<tr><td><strong>添加剂</strong></td><td>无</td><td>0.1M NaI</td></tr>
+<tr><td><strong>可行性评分</strong></td><td><strong>0%</strong> ❌</td><td><strong>75%</strong> ✅</td></tr>
+<tr><td><strong>历史依据</strong></td><td>三个禁区：pH 6.0 成功率 0%、PEG&gt;20% 无先例</td><td>pH 7.5 最优区间、4°C 强正向、NaI 100% 成功率</td></tr>
+</table>
+
+<h3>核心结论</h3>
+<ul>
+<li><strong>失败方案：</strong>三个参数同时踩中历史禁区——pH 6.0（CDK7 历史成功率 0%）、PEG3350 25%（无成功先例）、Tris_7.5 缓冲 pH 6.0（缓冲失效）</li>
+<li><strong>改进方案：</strong>pH 7.5（强正向，处于最优区间）、4°C（强正向，低温成功率高）、0.1M NaI（强正向，数据库 100% 成功率）</li>
+</ul>
+
+<hr>
+
+<h2>技术实现路径</h2>
+
+<h3>不需要从零开发，用飞书已有的东西</h3>
+
+<p><strong>核心依赖：</strong>飞书会议 AI + 飞书开放平台 + 领域数据</p>
+<p><strong>不依赖：</strong>任何外部系统、自研模型</p>
+
+<h3>推演引擎原理</h3>
+<p>不是真的用 AI 跑分子动力学模拟，是<strong>"数据对比 + 规则推断"</strong>：</p>
+<ol>
+<li><strong>相似条件匹配</strong>：从多维表格中找参数相近的历史实验，相似度计算基于 pH 差、浓度差、温度差</li>
+<li><strong>成功率估算</strong>：相似实验中成功的比例，加权——越相似权重越高、越近的权重越高</li>
+<li><strong>风险标注</strong>：匹配到"失败模式库"中的已知危险条件，例："pH-蛋白pI 差值 &lt; 1" → 标红"沉淀风险"</li>
+<li><strong>改进建议生成</strong>：在相似成功实验中找最接近的可行方案，生成具体参数调整建议</li>
+</ol>
+
+<hr>
+
+<h2>一句话总结</h2>
+<blockquote>
+<strong>飞书会议中，AI 实时拿历史数据"模拟跑一遍"当前讨论的参数，当场告诉你行不行、风险在哪、怎么改更好。</strong>
+</blockquote>
+
+<p style="text-align: center; color: #888; margin-top: 40px;">— 本文档由 AI 实验研发加速器团队生成 —</p>
+
+</body>
+</html>
