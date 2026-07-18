@@ -217,5 +217,81 @@
 
 <p style="text-align: center; color: #888; margin-top: 40px;">— 本文档由 AI 实验研发加速器团队生成 —</p>
 
+<div style="page-break-before: always;"></div>
+
+<h1>附录：Demo 推演实录</h1>
+
+<p>以下截图基于飞书多维表格中真实搭建的 55 条共晶实验历史数据，由本地 AI 助手实时推演生成。演示目标：验证"实验方案实时推演引擎"在实际数据上的可行性判断能力。</p>
+
+<hr>
+
+<h2>Demo 1：失败方案推演（可行性 0%）</h2>
+
+<h3>输入参数</h3>
+<table>
+<tr><th>参数</th><th>数值</th></tr>
+<tr><td>靶点蛋白</td><td>CDK7</td></tr>
+<tr><td>pH</td><td>6.0</td></tr>
+<tr><td>蛋白浓度</td><td>12 mg/ml</td></tr>
+<tr><td>温度</td><td>25°C</td></tr>
+<tr><td>沉淀剂</td><td>PEG3350</td></tr>
+<tr><td>PEG 浓度</td><td>25%</td></tr>
+<tr><td>缓冲液</td><td>Tris 7.5</td></tr>
+<tr><td>添加剂</td><td>无</td></tr>
+</table>
+
+<h3>推演结果截图</h3>
+<img src="assets/demo-failure/04-conclusion.png" style="max-width: 100%; border: 1px solid #ddd; border-radius: 6px; margin: 15px 0;">
+
+<h3>关键结论标注</h3>
+<ul>
+<li><strong>禁区 1：</strong>pH 6.0 —— CDK7 在此 pH 下历史成功率 <strong>0%</strong>（蛋白接近等电点 pI=6.3，极易沉淀）</li>
+<li><strong>禁区 2：</strong>PEG3350 25% —— CDK7 使用 PEG3350 超过 20% 浓度无成功先例</li>
+<li><strong>禁区 3：</strong>Tris_7.5 缓冲液在 pH 6.0 条件下缓冲失效，体系 pH 失控</li>
+<li><strong>综合判定：</strong>三个参数同时踩中历史禁区，<span style="color: #c00; font-weight: bold;">可行性 0%</span></li>
+</ul>
+
+<hr>
+
+<h2>Demo 2：改进方案推演（可行性 75%）</h2>
+
+<h3>输入参数</h3>
+<table>
+<tr><th>参数</th><th>数值</th></tr>
+<tr><td>靶点蛋白</td><td>CDK7</td></tr>
+<tr><td>pH</td><td>7.5</td></tr>
+<tr><td>蛋白浓度</td><td>15 mg/ml</td></tr>
+<tr><td>温度</td><td>4°C</td></tr>
+<tr><td>沉淀剂</td><td>PEG3350</td></tr>
+<tr><td>PEG 浓度</td><td>18%</td></tr>
+<tr><td>缓冲液</td><td>Tris 7.5</td></tr>
+<tr><td>添加剂</td><td>0.1M NaI</td></tr>
+</table>
+
+<h3>推演结果截图</h3>
+<img src="assets/demo-success/04-conclusion.png" style="max-width: 100%; border: 1px solid #ddd; border-radius: 6px; margin: 15px 0;">
+
+<h3>关键结论标注</h3>
+<ul>
+<li><strong>强正向 1：</strong>pH 7.5 —— 处于 CDK7 最优区间</li>
+<li><strong>强正向 2：</strong>4°C —— CDK7 低温条件下成功率高</li>
+<li><strong>强正向 3：</strong>0.1M NaI —— 数据库中该添加剂对应实验 <strong>100%</strong> 成功率</li>
+<li><strong>风险提示：</strong>PEG3350 18% 在 4°C 下无成功先例，建议降至 15%</li>
+<li><strong>优化后：</strong>蛋白浓度降至 12.5 mg/ml + PEG 降至 15%，可行性从 60% 提升至 <span style="color: #080; font-weight: bold;">75%</span></li>
+</ul>
+
+<hr>
+
+<h2>Demo 价值总结</h2>
+
+<table>
+<tr><th>维度</th><th>失败方案</th><th>改进方案</th></tr>
+<tr><td><strong>可行性评分</strong></td><td><span style="color: #c00; font-weight: bold;">0%</span></td><td><span style="color: #080; font-weight: bold;">75%</span></td></tr>
+<tr><td><strong>拦截价值</strong></td><td colspan="2">避免一次大概率失败的湿实验（节省 ¥2.4 万 + 1-2 周周期）</td></tr>
+<tr><td><strong>决策模式转变</strong></td><td colspan="2">从"经验直觉 → 试错验证"到"数据推演 → 即时纠偏"</td></tr>
+</table>
+
+<p style="margin-top: 20px; color: #666; font-size: 10pt;"><em>注：Demo 数据来源于飞书多维表格「共晶实验历史数据库」，含 55 条真实模拟实验记录，覆盖 CDK7/CDK4/CDK9/EGFR/KRAS 五个靶点。</em></p>
+
 </body>
 </html>
